@@ -26,7 +26,7 @@ public class UsuarioClient {
 
      public UsuarioDtoResponse buscarUsuario(UUID id){
          return webClient.get()
-                 .uri("/usuarios/{id}",id)
+                 .uri("/usuario/{id}",id)
                  .retrieve()
                  .bodyToMono(UsuarioDtoResponse.class)
                  .block();
