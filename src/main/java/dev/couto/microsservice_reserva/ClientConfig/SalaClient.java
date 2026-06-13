@@ -21,7 +21,7 @@ public class SalaClient {
 
     public SalaDtoResponse buscarSala(Integer id){
         return webClient.get()
-                .uri("/sala/{id}}",id)
+                .uri("/sala/{id}",id)
                 .retrieve()
                 .bodyToMono(SalaDtoResponse.class)
                 .block();
