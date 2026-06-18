@@ -1,14 +1,16 @@
 package dev.couto.microsservice_reserva.Service;
 
-import dev.couto.microsservice_reserva.HttpClient.SalaClient;
-import dev.couto.microsservice_reserva.HttpClient.UsuarioClient;
+import dev.couto.microsservice_reserva.InfraClient.SalaClient;
+import dev.couto.microsservice_reserva.InfraClient.UsuarioClient;
 import dev.couto.microsservice_reserva.Dto.ReservaRequestDto;
 import dev.couto.microsservice_reserva.Dto.ReservaResponseDto;
 import dev.couto.microsservice_reserva.Dto.SalaDtoResponse;
 import dev.couto.microsservice_reserva.Dto.UsuarioDtoResponse;
 import dev.couto.microsservice_reserva.Enum.StatusSala;
 import dev.couto.microsservice_reserva.Enum.statusReserva;
+import dev.couto.microsservice_reserva.Mapping.ProducerMapper;
 import dev.couto.microsservice_reserva.Mapping.ReservaMapper;
+import dev.couto.microsservice_reserva.RabbitmqConfig.ReservaProducer;
 import dev.couto.microsservice_reserva.Repository.ReservaRepository;
 import dev.couto.microsservice_reserva.domin.Reserva;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,8 @@ public class ReservaService {
     private final UsuarioClient usuarioClient;
     private final ReservaMapper reservaMapper;
     private  final ReservaRepository reservaRepository;
+    private final ReservaProducer reservaProducer;
+    private final ProducerMapper producerMapper;
 
     private static final Duration INTERVALO_MINIMO= Duration.ofMinutes(60);
 
@@ -69,8 +73,9 @@ public class ReservaService {
         reserva.setStatus(statusReserva.RESERVADO);
         reserva.setUsuarioId(usuario.id());
         reserva.setSalaId(sala.id());
-        var salvar = reservaRepository.save(reserva);
-        return reservaMapper.toDto(salvar);
+        var reservasalva = reservaRepository.save(reserva);
+        reservaProducer.enviar(producerMapper.toEvent(reservasalva));
+        return reservaMapper.toDto(reservasalva);
 
 
 
