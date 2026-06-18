@@ -1,4 +1,4 @@
-package dev.couto.microsservice_reserva.HttpClient;
+package dev.couto.microsservice_reserva.InfraClient;
 
 
 import dev.couto.microsservice_reserva.Dto.SalaDtoResponse;
