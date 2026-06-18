@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RecervaProducer {
+public class ReservaProducer {
 
 
     private final RabbitTemplate rabbitTemplate;
