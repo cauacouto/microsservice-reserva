@@ -1,7 +1,7 @@
 package dev.couto.microsservice_reserva.Service;
 
-import dev.couto.microsservice_reserva.ClientConfig.SalaClient;
-import dev.couto.microsservice_reserva.ClientConfig.UsuarioClient;
+import dev.couto.microsservice_reserva.HttpClient.SalaClient;
+import dev.couto.microsservice_reserva.HttpClient.UsuarioClient;
 import dev.couto.microsservice_reserva.Dto.ReservaRequestDto;
 import dev.couto.microsservice_reserva.Dto.ReservaResponseDto;
 import dev.couto.microsservice_reserva.Dto.SalaDtoResponse;
