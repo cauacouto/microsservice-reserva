@@ -7,6 +7,7 @@ public record ReservaProducerDto(
         Integer reservaId,
         UUID usuarioId,
         Integer salaId,
+        String email,
         LocalDateTime dataHoraInico,
         LocalDateTime dataHoraFim
 ) {
