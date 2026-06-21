@@ -1,7 +1,6 @@
 package dev.couto.microsservice_reserva.domin;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import dev.couto.microsservice_reserva.Enum.statusReserva;
 import jakarta.persistence.*;
 import lombok.*;
