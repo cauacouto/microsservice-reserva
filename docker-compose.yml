@@ -1,6 +1,36 @@
+version: "3.9"
+
 services:
   rabbitmq:
     image: rabbitmq:4-management
+    container_name: rabbitmq
+    restart: always
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  reserva-service:
+    build: .
+    container_name: reserva-service
+    restart: on-failure
+
+    depends_on:
+      - rabbitmq
+
+    ports:
+      - "8083:8083"
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+    environment:
+      SERVER_PORT: 8083
+
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/reserva_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root1234
+
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
