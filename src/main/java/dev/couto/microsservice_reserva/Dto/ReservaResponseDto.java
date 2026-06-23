@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record ReservaResponseDto(
+        Integer id,
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
         LocalDateTime dataInicio,
         @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -14,5 +15,7 @@ public record ReservaResponseDto(
         statusReserva status,
         UUID usuarioId,
         Integer salaId
+
+
 ) {
 }
