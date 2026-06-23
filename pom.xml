@@ -42,10 +42,6 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-
-
-
 	<dependencies>
 
 
@@ -55,10 +51,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-h2console</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
