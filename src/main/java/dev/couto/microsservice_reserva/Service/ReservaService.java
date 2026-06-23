@@ -1,11 +1,8 @@
 package dev.couto.microsservice_reserva.Service;
 
+import dev.couto.microsservice_reserva.Dto.*;
 import dev.couto.microsservice_reserva.InfraClient.SalaClient;
 import dev.couto.microsservice_reserva.InfraClient.UsuarioClient;
-import dev.couto.microsservice_reserva.Dto.ReservaRequestDto;
-import dev.couto.microsservice_reserva.Dto.ReservaResponseDto;
-import dev.couto.microsservice_reserva.Dto.SalaDtoResponse;
-import dev.couto.microsservice_reserva.Dto.UsuarioDtoResponse;
 import dev.couto.microsservice_reserva.Enum.StatusSala;
 import dev.couto.microsservice_reserva.Enum.statusReserva;
 import dev.couto.microsservice_reserva.Mapping.ProducerMapper;
@@ -46,6 +43,7 @@ public class ReservaService {
         UsuarioDtoResponse usuario=
                 usuarioClient.buscarUsuario(dto.usuarioId());
 
+
         SalaDtoResponse sala =
                 salaClient.buscarSala(dto.salaId());
 
@@ -74,7 +72,12 @@ public class ReservaService {
         reserva.setUsuarioId(usuario.id());
         reserva.setSalaId(sala.id());
         var reservasalva = reservaRepository.save(reserva);
-        reservaProducer.enviar(producerMapper.toEvent(reservasalva));
+       ReservaProducerDto event =
+               producerMapper.toEvent(reservasalva, usuario.email());
+
+         reservaProducer.enviar(event);
+        System.out.println(reservasalva);
+
         return reservaMapper.toDto(reservasalva);
 
 
