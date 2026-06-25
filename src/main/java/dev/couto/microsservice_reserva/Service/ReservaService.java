@@ -75,6 +75,9 @@ public class ReservaService {
        ReservaProducerDto event =
                producerMapper.toEvent(reservasalva, usuario.email());
 
+        System.out.println("===== EVENTO =====");
+        System.out.println(event);
+
          reservaProducer.enviar(event);
         System.out.println(reservasalva);
 
