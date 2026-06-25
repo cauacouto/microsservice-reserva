@@ -17,9 +17,6 @@ public class ReservaProducer {
 
     public void enviar(ReservaProducerDto reservaProducer){
 
-
-        System.out.println("=== ENVIANDO EVENTO ===");
-        System.out.println(reservaProducer);
         rabbitTemplate.convertAndSend(
                 reservaExchange.getName(),
                 "",
