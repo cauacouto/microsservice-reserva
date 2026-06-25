@@ -20,7 +20,7 @@ public class Reserva implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     @Column(name = "id")
+
     private Integer id;
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime dataInicio;
